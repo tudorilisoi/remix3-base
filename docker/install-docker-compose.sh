@@ -1,6 +1,6 @@
 #!/bin/bash
 COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
-echo $COMPOSE_VERSION
+echo "Latest version $COMPOSE_VERSION"
 COMPOSE_VERSION="v2.23.1"
 URL=https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m`
 echo $URL
