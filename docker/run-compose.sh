@@ -23,8 +23,7 @@ if grep -sq 'docker\|lxc' /proc/1/cgroup; then
     exit 1;
 fi
 BUILD_CMD="cd /app;\
-npm install;\
-npm run zen;\
+npm install --no-update-notifier;\
 npm run build;\
 "
 EXTRA_ARGS="-d"
