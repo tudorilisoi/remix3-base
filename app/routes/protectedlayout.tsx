@@ -1,4 +1,4 @@
-import { Link, Outlet, useFetcher, useNavigate } from "react-router"
+import { Link, Outlet, useNavigate } from "react-router"
 import { toast } from "sonner"
 import logo from "~/assets/logo-marelvi-service.svg"
 import { authServer } from "~/auth/auth_server"
@@ -11,9 +11,9 @@ export async function loader({ context, request }: Route.LoaderArgs) {
   console.log(`🚀 ~ loader ~ session:`, session)
   return { session }
 }
+type  Session = Awaited<ReturnType<typeof authServer.api.getSession>>
 
-function UserMenu({ session }) {
-  const fetcher = useFetcher()
+function UserMenu({ session }:{session:Session}) {
   const navigate = useNavigate()
   const logout = async () => {
     try {
