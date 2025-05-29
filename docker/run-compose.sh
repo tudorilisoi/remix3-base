@@ -4,7 +4,7 @@ export CURRENT_UID=$(id -u)
 export CURRENT_GUID=$(id -g)
 
 
-output=$("$script_path/check_docker_rootless.sh")
+output=$("$script_path/check-docker-rootless.sh")
 exit_code=$?
 
 echo "Script output was: $output"
@@ -58,7 +58,5 @@ fi
 
 mkdir -p /tmp/rp-web-tmp
 mkdir -p /tmp/rp-web-cache
-# set +e
-# docker build --build-arg CURRENT_GUID=$CURRENT_GUID CURRENT_UID=$CURRENT_UID -f ./Dockerfile.nodejs
 docker-compose -f "$script_path/docker-compose.yml" down 2>&1
 docker-compose -f "$script_path/docker-compose.yml" up --build $EXTRA_ARGS

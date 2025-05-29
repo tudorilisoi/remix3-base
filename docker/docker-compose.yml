@@ -30,7 +30,7 @@ services:
         CURRENT_UID: ${CURRENT_UID}
     container_name: "remix3-http"
     tty: true # Enables debugging capabilities when attached to this container.
-    # run as me
+    # run as me when not in rootless mode
     # get the ids like this:
     # export CURRENT_UID_GID=$(id -u):$(id -g)
     # user: ${CURRENT_UID}:${CURRENT_GUID}
@@ -40,7 +40,7 @@ services:
     links:
       - db
     command: sh -c '${WEB_CMD}'
-    ports:      
+    ports:
       - 3200:3200
       - 5173:5173
     volumes:
