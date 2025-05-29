@@ -1,11 +1,11 @@
-import { Form, Link, redirect } from 'react-router'
-import { authClient } from '~/auth/auth_client'
+import { Form, Link, redirect } from "react-router"
+import { authClient } from "~/auth/auth_client"
 
-import type { Route } from './+types/signup'
-import { db } from '~/server/db'
+import { db } from "~/server/db"
+import type { Route } from "./+types/signup"
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: 'Signup' }, { name: 'description', content: 'Signup page' }]
+  return [{ title: "Signup" }, { name: "description", content: "Signup page" }]
 }
 
 export async function loader({ context, request }: Route.LoaderArgs) {
@@ -29,27 +29,23 @@ export async function loader({ context, request }: Route.LoaderArgs) {
   return auth.handler(request)
 } */
 
-  export async function clientAction({ request }: Route.ClientActionArgs) {
-    const formData = await request.formData();
-    const email = formData.get("email") as string;
-    const name = formData.get("name") as string;
-    const password = formData.get("password") as string;
-  
- 
-    const { error } = await authClient.signUp.email({
-      email: email.trim().toLowerCase(),
-      // name: name.trim(),
-      name: 'Vasile',
-      password: password.trim(),
-      callbackURL: "/",
-      
-    });
-    console.log(`🚀 ~ clientAction ~ error:`, error)
-  
-   
-    return redirect("/signup");
-  }
-  
+export async function clientAction({ request }: Route.ClientActionArgs) {
+  const formData = await request.formData()
+  const email = formData.get("email") as string
+  const name = formData.get("name") as string
+  const password = formData.get("password") as string
+
+  const { error } = await authClient.signUp.email({
+    email: email.trim().toLowerCase(),
+    // name: name.trim(),
+    name: "Vasile",
+    password: password.trim(),
+    callbackURL: "/",
+  })
+  console.log(`🚀 ~ clientAction ~ error:`, error)
+
+  return redirect("/signup")
+}
 
 export default function Signup({
   actionData,
@@ -63,7 +59,7 @@ export default function Signup({
         <input type="text" name="password" />
         <input type="submit" name="Submit" />
       </Form>
-      <Link to={'/'}>Home</Link>
+      <Link to={"/"}>Home</Link>
     </div>
   )
 }

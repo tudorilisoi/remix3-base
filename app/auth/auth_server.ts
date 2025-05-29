@@ -1,7 +1,6 @@
-import { betterAuth } from 'better-auth'
-import { prismaAdapter } from 'better-auth/adapters/prisma'
-import { db } from '../server/db'
-
+import { betterAuth } from "better-auth"
+import { prismaAdapter } from "better-auth/adapters/prisma"
+import { db } from "../server/db"
 
 export const authServer = betterAuth({
   //   socialProviders: {
@@ -17,7 +16,7 @@ export const authServer = betterAuth({
     enabled: true,
   },
   database: prismaAdapter(db, {
-    provider: 'postgresql',
+    provider: "postgresql",
   }),
 })
 

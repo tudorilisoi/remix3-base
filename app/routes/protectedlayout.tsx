@@ -1,14 +1,10 @@
-import { Link, Outlet, useFetcher, useNavigate } from 'react-router'
-import { authServer } from '~/auth/auth_server'
-import type { Route } from './+types/protectedlayout'
-import logo from '~/assets/logo-marelvi-service.svg'
-import { toast } from 'sonner'
-import {
-  SidebarProvider,
-  Sidebar,
-  SidebarTrigger,
-} from '~/components/ui/sidebar'
-import { AppSidebar } from '~/components/app-sidebar'
+import { Link, Outlet, useFetcher, useNavigate } from "react-router"
+import { toast } from "sonner"
+import logo from "~/assets/logo-marelvi-service.svg"
+import { authServer } from "~/auth/auth_server"
+import { AppSidebar } from "~/components/app-sidebar"
+import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
+import type { Route } from "./+types/protectedlayout"
 
 export async function loader({ context, request }: Route.LoaderArgs) {
   const session = await authServer.api.getSession({ headers: request.headers })
@@ -21,10 +17,10 @@ function UserMenu({ session }) {
   const navigate = useNavigate()
   const logout = async () => {
     try {
-      const response = await fetch('/api/auth/sign-out', {
-        method: 'POST',
+      const response = await fetch("/api/auth/sign-out", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({}),
       })
@@ -32,15 +28,15 @@ function UserMenu({ session }) {
         return toast.error(`Cannot logout, code: ${response.status}`)
       }
     } catch (error) {
-      return toast.error(`Cannot logout: ${error?.toString() || 'unknown err'}`)
+      return toast.error(`Cannot logout: ${error?.toString() || "unknown err"}`)
     }
-    toast.success('Logged out')
-    navigate('/login')
+    toast.success("Logged out")
+    navigate("/login")
   }
   if (session === null) {
     return (
       <div>
-        <Link className="text-white font-bold text-xl" to={'/login'}>
+        <Link className="text-white font-bold text-xl" to={"/login"}>
           Login
         </Link>
       </div>
@@ -55,7 +51,10 @@ export default function ProtectedLayout({
   return (
     <div className="bg-foreground">
       <div className="min-h-screen flex flex-col bg-primary-foreground  ">
-        <div id="header" className="flex items-center justify-center bg-brand px-2 pr-4">
+        <div
+          id="header"
+          className="flex items-center justify-center bg-brand px-2 pr-4"
+        >
           <div className="flex-1">
             <img
               src={logo}
@@ -68,7 +67,7 @@ export default function ProtectedLayout({
           </div>
         </div>
         <SidebarProvider>
-      <AppSidebar />
+          <AppSidebar />
           <main className="p-4 min-h-full flex-1 flex flex-col">
             <SidebarTrigger />
             <Outlet />
