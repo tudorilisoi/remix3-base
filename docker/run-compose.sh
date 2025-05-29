@@ -10,9 +10,9 @@ exit_code=$?
 echo "Script output was: $output"
 if [ $exit_code -eq 1 ]; then
     echo "Preparing for rootless operations..."
+    # Configure for rootless mode
     export CURRENT_UID=root
     export CURRENT_GUID=root
-    # Configure for rootless mode
 else
     echo "Preparing for standard root operations..."
     # Configure for root mode
