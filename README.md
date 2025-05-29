@@ -2,6 +2,8 @@
 
 A modern, production-ready template for building full-stack React applications using React Router.
 
+**WARNING this README file is incomplete ath this time**
+
 ## Features
 
 - 🚀 Server-side rendering
@@ -9,21 +11,28 @@ A modern, production-ready template for building full-stack React applications u
 - 📦 Asset bundling and optimization
 - 🔄 Data loading and mutations
 - 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
+- 🎉 TailwindCSS for styling, along with ShaCDN UI components
 - 📖 [React Router docs](https://reactrouter.com/)
+- Prisma for the db layer
+- better-auth for authentication/authorization
+- ESlint and prettier for consistent code formattind along with husky pre-commit hook
 
 ## Getting Started
 
 ### Installation
 
-TODO <https://docs.docker.com/engine/security/rootless/#install>
+### Prerequisites
+
+- install docker and docker compose
+- switch docker to rootless <https://docs.docker.com/engine/security/rootless/#install>
+- run `./docker/run-compose.sh build && ./docker/run-compose.sh logs` from the project folder
 
 ### Development
 
 Start the development server with HMR:
 
 ```bash
-npm run dev
+./docker/run-compose.sh start && ./docker/run-compose.sh logs
 ```
 
 Your application will be available at `http://localhost:5173`.
