@@ -54,19 +54,19 @@ function replaceConsoleLog(): Plugin {
             const path = splitArgs[0]
             // const re = /\/app\/.+?:\d:\d/
             const re = /(\/app\/.+?):(\d):(\d)/
-            const matches = path.match(re)
+            /* const matches = path.match(re)
             if (!matches) {
               return match
             }
             const [g0, g1, g2, g3] = matches
 
-            splitArgs[0] = `vscode://file${HOST_APP_PATH}${g1}%3A${g2}%3A${g3}`
+            splitArgs[0] = `"vscode://file${HOST_APP_PATH}${g1}%3A${g2}%3A${g3}"` */
 
-            /* splitArgs[0] = path.replace(
+            splitArgs[0] = path.replace(
               re,
               (g0, g1, g2, g3) =>
-                `vscode://file${HOST_APP_PATH}${g1}:${g2}:${g3}`,
-            ) */
+                `vscode://file${HOST_APP_PATH}${g1}%3A${g2}%3A${g3}`,
+            )
           } else {
             return match // don't modify if first argument isn't a string
           }
