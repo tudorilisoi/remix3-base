@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# this allows chrome to open vscode:// URLS without prompt
+
 # Define the policy path and filename
 POLICY_DIR="/etc/opt/chrome/policies/managed"
 POLICY_FILE="$POLICY_DIR/external_protocols.json"
