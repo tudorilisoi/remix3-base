@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home"
 
 export function meta({}: Route.MetaArgs) {
+  console.log("meta func", { foo: 42 })
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },

@@ -17,6 +17,7 @@ services:
       - ../.data/pg:/var/lib/postgresql/data
 
   web:
+    env_file: ./.env.generated
     mem_limit: ${WEB_MEM_LIMIT}
     # environment:
     #   - CURRENT_GUID=${CURRENT_GUID}

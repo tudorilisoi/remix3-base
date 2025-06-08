@@ -2,7 +2,8 @@
 script_path=$(dirname "$(readlink -f "$0")")
 export CURRENT_UID=$(id -u)
 export CURRENT_GUID=$(id -g)
-
+export HOST_APP_PATH=$(realpath "$script_path/../")
+echo "HOST_APP_PATH=$HOST_APP_PATH" > "$script_path/.env.generated"
 
 output=$("$script_path/check-docker-rootless.sh")
 exit_code=$?
