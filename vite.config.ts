@@ -60,7 +60,7 @@ function replaceConsoleLog(): Plugin {
             }
             const [g0, g1, g2, g3] = matches
 
-            splitArgs[0] = `new URL("vscode://file${HOST_APP_PATH}${g1}:${g2}:${g3}").toString()`
+            splitArgs[0] = `vscode://file${HOST_APP_PATH}${g1}%3A${g2}%3A${g3}`
 
             /* splitArgs[0] = path.replace(
               re,
