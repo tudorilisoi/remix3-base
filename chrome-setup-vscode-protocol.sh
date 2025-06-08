@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # this allows chrome to open vscode:// URLS without prompt
+# open chrome://policy/ in browser to reload and check
 
 # Define the policy path and filename
 POLICY_DIR="/etc/opt/chrome/policies/managed"
