@@ -47,7 +47,7 @@ function replaceConsoleLog(): Plugin {
           const trimmed = args.trim()
 
           // Split arguments, but safely (handle only simple comma separation)
-          const splitArgs = trimmed.split(",").map((arg) => arg.trim())
+          const splitArgs = trimmed.split(",").map((arg: string) => arg.trim())
 
           // If first arg is a string literal (single or double quote)
           if (/^(['"`]).*\1$/.test(splitArgs[0])) {
@@ -64,7 +64,7 @@ function replaceConsoleLog(): Plugin {
 
             splitArgs[0] = path.replace(
               re,
-              (g0, g1, g2, g3) =>
+              (g0: string, g1: string, g2: string, g3: string) =>
                 `vscode://file${HOST_APP_PATH}${g1}%3A${g2}%3A${g3}`,
             )
           } else {
