@@ -53,7 +53,7 @@ function replaceConsoleLog(): Plugin {
           if (/^(['"`]).*\1$/.test(splitArgs[0])) {
             const path = splitArgs[0]
             // const re = /\/app\/.+?:\d:\d/
-            const re = /(\/app\/.+?):(\d):(\d)/
+            const re = /(\/app\/.+?):(\d+):(\d+)/
             /* const matches = path.match(re)
             if (!matches) {
               return match
