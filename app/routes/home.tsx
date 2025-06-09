@@ -1,7 +1,6 @@
 import type { Route } from "./+types/home"
 
 export function meta({}: Route.MetaArgs) {
-  console.log("meta func", { foo: 42 })
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
@@ -13,6 +12,7 @@ export async function loader({ context }: Route.LoaderArgs) {
 }
 
 export default function Home({ actionData, loaderData }: Route.ComponentProps) {
+  console.log("Rendering the home route")
   return (
     <div>
       <p>Home!!</p>

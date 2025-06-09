@@ -4,8 +4,10 @@ import fs from "fs"
 import { reactRouterDevTools } from "react-router-devtools"
 import { defineConfig } from "vite"
 import tsconfigPaths from "vite-tsconfig-paths"
+
 // vite-plugin-replace-console-log.ts
 import { type Plugin } from "vite"
+import devtoolsJson from "vite-plugin-devtools-json"
 
 const { HOST_APP_PATH } = process.env
 function open(path: string, lineNumber: string | undefined) {
@@ -17,7 +19,7 @@ console.log(`PWD is: ${process.env.HOST_APP_PATH}`)
 
 export default defineConfig({
   plugins: [
-    // devtoolsJson(),
+    devtoolsJson(),
     // reactRouterDevTools({ editor: { name: "Host code", open } }),
     reactRouterDevTools(),
     replaceConsoleLog(),
