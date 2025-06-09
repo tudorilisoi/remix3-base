@@ -1,9 +1,9 @@
 import { Link, Outlet, useNavigate } from "react-router"
 import { toast } from "sonner"
-import logo from "~/assets/logo-marelvi-service.svg"
 import { authServer } from "~/auth/auth_server"
 import { AppSidebar } from "~/components/app-sidebar"
 import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
+import logo from "~/welcome/logo-light.svg"
 import type { Route } from "./+types/protectedlayout"
 
 export async function loader({ context, request }: Route.LoaderArgs) {
@@ -11,9 +11,9 @@ export async function loader({ context, request }: Route.LoaderArgs) {
   console.log(`🚀 ~ loader ~ session:`, session)
   return { session }
 }
-type  Session = Awaited<ReturnType<typeof authServer.api.getSession>>
+type Session = Awaited<ReturnType<typeof authServer.api.getSession>>
 
-function UserMenu({ session }:{session:Session}) {
+function UserMenu({ session }: { session: Session }) {
   const navigate = useNavigate()
   const logout = async () => {
     try {
@@ -55,10 +55,10 @@ export default function ProtectedLayout({
           id="header"
           className="flex items-center justify-center bg-brand px-2 pr-4"
         >
-          <div className="flex-1">
+          <div className="flex-1 py-4">
             <img
               src={logo}
-              alt="Marelvi"
+              alt="RR app"
               className="block w-[20rem] dark:hidden"
             />
           </div>
