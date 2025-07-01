@@ -16,7 +16,7 @@ import { cn } from "~/lib/utils"
 import type { Route } from "./+types/login"
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
-  await new Promise((r) => setTimeout(r, 3000))
+  // await new Promise((r) => setTimeout(r, 3000))
 
   const formData = await request.formData()
   const email = formData.get("email") as string

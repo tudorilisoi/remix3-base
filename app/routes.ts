@@ -6,7 +6,7 @@ import {
 } from "@react-router/dev/routes"
 
 export default [
-  /* 
+  /*
   layout('routes/auth/authlayout.tsx', [
   ]), */
   layout("routes/protectedlayout.tsx", [

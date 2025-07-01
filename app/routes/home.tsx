@@ -8,7 +8,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader({ context }: Route.LoaderArgs) {
-  return null
+  // return {date: new Date().toISOString()}
+  return "Foobar"
 }
 
 export default function Home({ actionData, loaderData }: Route.ComponentProps) {
