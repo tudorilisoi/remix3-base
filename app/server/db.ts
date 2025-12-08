@@ -1,7 +1,11 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaPg } from "@prisma/adapter-pg"
+import "dotenv/config"
+import { PrismaClient } from "../../prisma/generated/client.js"
+
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! })
 
 const prismaClientSingleton = () => {
-  return new PrismaClient()
+  return new PrismaClient({ adapter })
 }
 
 type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>

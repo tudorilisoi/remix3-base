@@ -9,3 +9,4 @@
 
 package-lock.json
 docker/.env.generated
+prisma/generated/*
