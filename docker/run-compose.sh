@@ -41,16 +41,16 @@ elif [ "$1" == "start" ]; then
     export WEB_CMD="npm run start"
 elif [ "$1" == "stop" ]; then
     echo "Running stop command"
-    docker-compose -f "$script_path/docker-compose.yml" down 2>&1
+    docker compose -f "$script_path/docker-compose.yml" down 2>&1
     exit 0
 elif [ "$1" == "build" ]; then
     echo "Running build command"
-     export WEB_MEM_LIMIT="4G"
+    export WEB_MEM_LIMIT="4G"
     export WEB_CMD=$BUILD_CMD
     EXTRA_ARGS="--abort-on-container-exit" # no detach
 elif [ "$1" == "logs" ]; then
     echo "Running logs command"
-    docker-compose -f "$script_path/docker-compose.yml" logs -f
+    docker compose -f "$script_path/docker-compose.yml" logs -f
     exit 0
 else
     echo "Invalid argument. Usage: $0 [dev|start|stop|build|logs]"
@@ -59,5 +59,5 @@ fi
 
 mkdir -p /tmp/rp-web-tmp
 mkdir -p /tmp/rp-web-cache
-docker-compose -f "$script_path/docker-compose.yml" down 2>&1
-docker-compose -f "$script_path/docker-compose.yml" up --build $EXTRA_ARGS
+docker compose -f "$script_path/docker-compose.yml" down 2>&1
+docker compose -f "$script_path/docker-compose.yml" up --build $EXTRA_ARGS
