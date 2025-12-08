@@ -42,7 +42,7 @@ services:
       - db
     command: sh -c '${WEB_CMD}'
     ports:
-      - 3200:3200
+      - 42069:42069
       - 5173:5173
     volumes:
       - ../:/app
