@@ -4,7 +4,7 @@ import { authServer } from "~/auth/auth_server"
 import { AppSidebar } from "~/components/app-sidebar"
 import { Button } from "~/components/ui/button"
 import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
-import logo from "~/welcome/logo-light.svg"
+import logo from "~/welcome/logo-dark.svg"
 import type { Route } from "./+types/protectedlayout"
 
 export async function loader({ context, request }: Route.LoaderArgs) {
@@ -56,14 +56,10 @@ export default function ProtectedLayout({
           id="header"
           className="flex items-center justify-center bg-brand px-2 pr-4"
         >
-          <div className="flex-1 py-4">
-            <img
-              src={logo}
-              alt="RR app"
-              className="block w-[20rem] dark:hidden"
-            />
+          <div className="flex-1 py-4 ">
+            <img src={logo} alt="RR app" className="block w-[10rem]" />
           </div>
-          <div className="  h-full py-2">
+          <div className="  py-2">
             <UserMenu session={session} />
           </div>
         </div>
