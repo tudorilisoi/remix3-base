@@ -95,26 +95,37 @@ model Person {
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
+  // TODO uploads (all kinds)
 
-  events EventPersons[]
+  events EventParticipants[]
 }
 
 model EventData {
-  id          String   @id @default(cuid(2))
+  id          String              @id @default(cuid(2))
+  // e.g birth, death, wedding, name change, location change
+  // this should be modeled freeform in Zod ranther than enum
+  // perf challenge?
   type        String
   description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @default(now())
   // TODO optional location
   // TODO uploads
-  persons EventPersons[]
+  persons     EventParticipants[]
+  @@index([type])
 }
+
 // https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/many-to-many-relations
-model EventPersons {
-  person   Person    @relation(fields: [personId], references: [id])
-  personId String
-  event    EventData @relation(fields: [eventId], references: [id])
-  eventId  String
+model EventParticipants {
+  person    Person    @relation(fields: [personId], references: [id])
+  personId  String
+  event     EventData @relation(fields: [eventId], references: [id])
+  eventId   String
+  // e.g godfather, bride, newborn, or maybe __self (when born, died, or changed name)
+  role      String
+  eventDate DateTime
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
 
   @@id([eventId, personId])
 }

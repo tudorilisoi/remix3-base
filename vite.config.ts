@@ -34,7 +34,7 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
-    exclude: ["@prisma/client"],
+    exclude: ["@prisma/client", "@radix-ui"],
   },
   resolve: {
     alias: {

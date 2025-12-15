@@ -11,7 +11,7 @@ export function meta({}: Route.MetaArgs) {
 export async function loader({ context }: Route.LoaderArgs) {
   const communities = await db.community.findMany()
   const persons = await db.person.findMany()
-  const evp = db.eventPersons.findMany()
+  const evp = db.eventParticipants.findMany()
   return {
     communities,
     persons,
