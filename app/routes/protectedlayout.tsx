@@ -42,14 +42,14 @@ function UserMenu({ session }: { session: Session }) {
       </div>
     )
   }
-  return <div onClick={logout}>Logat</div>
+  return <div onClick={logout}>{session.user.name}</div>
 }
 
 export default function ProtectedLayout({
   loaderData: { session },
 }: Route.ComponentProps) {
   return (
-    <div className="bg-foreground">
+    <div className="dark text-foreground">
       <div className="min-h-screen flex flex-col bg-primary-foreground  ">
         <div
           id="header"
