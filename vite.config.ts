@@ -28,9 +28,14 @@ export default defineConfig({
     reactRouter(),
     tsconfigPaths(),
     viteRestart({
-      restart: ["prisma/generated/client.ts"],
+      delay: 3000,
+      glob: true,
+      restart: ["prisma/generated/**"],
     }),
   ],
+  optimizeDeps: {
+    exclude: ["@prisma/client"],
+  },
   resolve: {
     alias: {
       ".prisma/client/index-browser":
