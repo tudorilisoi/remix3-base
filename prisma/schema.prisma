@@ -109,7 +109,7 @@ model EventData {
   description String?
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @default(now())
-  // TODO optional location
+  // TODO optional location relation, pin or administrative unit
   // TODO uploads
   persons     EventParticipants[]
   @@index([type])
@@ -121,7 +121,7 @@ model EventParticipants {
   personId  String
   event     EventData @relation(fields: [eventId], references: [id])
   eventId   String
-  // e.g godfather, bride, newborn, or maybe __self (when born, died, or changed name)
+  // e.g godfather, bride, newborn, or maybe _subject_ (when born, died, or changed name)
   role      String
   eventDate DateTime
   createdAt DateTime  @default(now())
@@ -129,3 +129,7 @@ model EventParticipants {
 
   @@id([eventId, personId])
 }
+
+
+// TODO location model w/radius, administrative unit
+// progressively exact
