@@ -35,7 +35,8 @@ export WEB_MEM_LIMIT="1G"
 if [ "$1" == "dev" ]; then
     echo "Running development command"
     export WEB_MEM_LIMIT="4G"
-    export WEB_CMD='npm run dev'
+    # export WEB_CMD='npm run dev'
+    export WEB_CMD='nodemon --watch prisma/generated/ -e ts --delay 3000ms --exec "node ./node_modules/.bin/react-router dev --host"'
 elif [ "$1" == "start" ]; then
     echo "Running start command"
     export WEB_CMD="npm run start"

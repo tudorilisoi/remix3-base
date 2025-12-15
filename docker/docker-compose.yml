@@ -40,7 +40,7 @@ services:
       - db
     links:
       - db
-    command: sh -c '${WEB_CMD}'
+    command: ${WEB_CMD}
     ports:
       - 42069:42069
       - 5173:5173
