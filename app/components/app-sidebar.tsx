@@ -42,7 +42,7 @@ const items = [
 
 export function AppSidebar() {
   return (
-    <Sidebar className="mt-20 pt-4 xsticky h-screen">
+    <Sidebar className="mt-0 pt-0 sticky h-screen">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>

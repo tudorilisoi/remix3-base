@@ -2,6 +2,7 @@ import { Link, Outlet, useNavigate } from "react-router"
 import { toast } from "sonner"
 import { authServer } from "~/auth/auth_server"
 import { AppSidebar } from "~/components/app-sidebar"
+import { Button } from "~/components/ui/button"
 import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
 import logo from "~/welcome/logo-light.svg"
 import type { Route } from "./+types/protectedlayout"
@@ -35,14 +36,14 @@ function UserMenu({ session }: { session: Session }) {
   }
   if (session === null) {
     return (
-      <div>
+      <Button>
         <Link className="text-white font-bold text-xl" to={"/login"}>
           Login
         </Link>
-      </div>
+      </Button>
     )
   }
-  return <div onClick={logout}>{session.user.name}</div>
+  return <Button onClick={logout}>{session.user.name}</Button>
 }
 
 export default function ProtectedLayout({
@@ -62,14 +63,14 @@ export default function ProtectedLayout({
               className="block w-[20rem] dark:hidden"
             />
           </div>
-          <div className="  h-full">
+          <div className="  h-full py-2">
             <UserMenu session={session} />
           </div>
         </div>
         <SidebarProvider>
           <AppSidebar />
-          <main className="p-4 min-h-full flex-1 flex flex-col">
-            <SidebarTrigger />
+          <SidebarTrigger />
+          <main className="p-4 min-h-screen flex-1 flex flex-col">
             <Outlet />
           </main>
         </SidebarProvider>
