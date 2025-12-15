@@ -1,3 +1,4 @@
+import { db } from "~/server/db"
 import type { Route } from "./+types/home"
 
 export function meta({}: Route.MetaArgs) {
@@ -8,8 +9,10 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader({ context }: Route.LoaderArgs) {
-  // return {date: new Date().toISOString()}
-  return "Foobar"
+  const communities = await db.community.findMany()
+  return {
+    communities,
+  }
 }
 
 export default function Home({ actionData, loaderData }: Route.ComponentProps) {

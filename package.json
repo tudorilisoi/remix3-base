@@ -68,6 +68,7 @@
     "typescript-eslint": "^8.49.0",
     "vite": "^7.3.0",
     "vite-plugin-devtools-json": "^1.0.0",
+    "vite-plugin-restart": "^2.0.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "lint-staged": {

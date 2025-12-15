@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite"
 import fs from "fs"
 import { reactRouterDevTools } from "react-router-devtools"
 import { defineConfig } from "vite"
+import viteRestart from "vite-plugin-restart"
 import tsconfigPaths from "vite-tsconfig-paths"
 
 // vite-plugin-replace-console-log.ts
@@ -26,6 +27,9 @@ export default defineConfig({
     tailwindcss(),
     reactRouter(),
     tsconfigPaths(),
+    viteRestart({
+      restart: ["prisma/generated/client.ts"],
+    }),
   ],
   resolve: {
     alias: {
