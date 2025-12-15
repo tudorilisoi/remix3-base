@@ -19,6 +19,7 @@ body {
 }
 
 :root {
+  font-size: 22px;
   --brand: rgb(176, 45, 33);
 
   --sidebar-background: 0 0% 98%;
