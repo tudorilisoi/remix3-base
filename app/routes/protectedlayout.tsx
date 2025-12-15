@@ -1,7 +1,8 @@
+import { LogOut } from "lucide-react"
 import { Link, Outlet, useNavigate } from "react-router"
 import { toast } from "sonner"
 import { authServer } from "~/auth/auth_server"
-import { AppSidebar } from "~/components/app-sidebar"
+import { AppSidebar } from "~/components/AppSidebar"
 import { Button } from "~/components/ui/button"
 import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
 import logo from "~/welcome/logo-dark.svg"
@@ -43,7 +44,12 @@ function UserMenu({ session }: { session: Session }) {
       </Button>
     )
   }
-  return <Button onClick={logout}>{session.user.name}</Button>
+  return (
+    <Button onClick={logout}>
+      {session.user.name}
+      <LogOut />
+    </Button>
+  )
 }
 
 export default function ProtectedLayout({
