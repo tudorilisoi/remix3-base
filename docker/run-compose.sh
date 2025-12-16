@@ -23,9 +23,9 @@ if grep -sq 'docker\|lxc' /proc/1/cgroup; then
     echo "Cannot run inside a container"
     exit 1;
 fi
-BUILD_CMD="cd /app;\
+BUILD_CMD="sh -c "cd /app;\
 npm install --legacy-peer-deps --no-update-notifier;\
-npm run build;\
+npm run build"\
 "
 EXTRA_ARGS="-d"
 export WEB_MEM_LIMIT="1G"

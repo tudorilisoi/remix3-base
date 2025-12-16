@@ -26,11 +26,6 @@ export default defineConfig({
     tailwindcss(),
     reactRouter(),
     tsconfigPaths(),
-    /*    viteRestart({
-      delay: 3000,
-      glob: true,
-      restart: ["prisma/generated/**"],
-    }), */
   ],
   optimizeDeps: {
     exclude: ["@prisma/client", "@radix-ui"],
