@@ -19,6 +19,7 @@ ENV LD_PRELOAD /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
 RUN echo "/usr/lib/x86_64-linux-gnu/libjemalloc.so.2" >> /etc/ld.so.preload
 
 ENV PATH /app/node_modules/.bin:$PATH
+RUN npm config set legacy-peer-deps true
 RUN npm i -g npm@11.6.4
 RUN npm i -g nodemon@latest
 # USER root
