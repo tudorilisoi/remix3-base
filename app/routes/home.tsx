@@ -26,7 +26,7 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
     <div>
       <h1 className="my-4">Your slice of history</h1>
       <Tabs defaultValue="account" className="w-full">
-        <TabsList className="flex w-full">
+        <TabsList className="flex w-full gap-2 ">
           <TabsTrigger value="people" className="">
             People
           </TabsTrigger>
