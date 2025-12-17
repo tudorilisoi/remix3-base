@@ -14,7 +14,7 @@ services:
     ports:
       - 5452:5452
     volumes:
-      - ../.data/pg:/var/lib/postgresql/data
+      - ../../people-over-time-data/pg:/var/lib/postgresql/data
 
   web:
     env_file: ./.env.generated
