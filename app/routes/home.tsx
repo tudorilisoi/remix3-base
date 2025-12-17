@@ -1,3 +1,4 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
 import { db } from "~/server/db"
 import type { Route } from "./+types/home"
 
@@ -23,7 +24,17 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
   console.log("Rendering the home route")
   return (
     <div>
-      <h1>Overview</h1>
+      <h1 className="my-4">Your slice of history</h1>
+      <Tabs defaultValue="account" className="w-full">
+        <TabsList className="flex w-full">
+          <TabsTrigger value="people" className="">
+            People
+          </TabsTrigger>
+          <TabsTrigger value="timeline">Timeline</TabsTrigger>
+        </TabsList>
+        <TabsContent value="people">+</TabsContent>
+        <TabsContent value="timeline">Timeline here</TabsContent>
+      </Tabs>
     </div>
   )
 }
