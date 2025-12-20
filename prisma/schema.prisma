@@ -112,6 +112,9 @@ model EventData {
   // TODO optional location relation, pin or administrative unit
   // TODO uploads
   persons     EventParticipants[]
+  location    Location            @relation(fields: [locationId], references: [id])
+  locationId  String
+
   @@index([type])
 }
 
@@ -130,7 +133,34 @@ model EventParticipants {
   @@id([eventId, personId])
 }
 
-
 // TODO location model w/radius, administrative unit
 // progressively exact
 // WOOT?
+model Location {
+  id String @id @default(uuid())
+
+  locationRaw String?
+
+  // Parsed components
+  country  String?
+  region   String?
+  city     String?
+  locality String?
+
+  latitude  Float?
+  longitude Float?
+
+  locationConfidence LocationConfidence?
+
+  createdAt  DateTime    @default(now())
+  updatedAt DateTime  @default(now())
+  eventData EventData[]
+}
+
+enum LocationConfidence {
+  EXACT
+  APPROXIMATE
+  REGION_ONLY
+  COUNTRY_ONLY
+  UNKNOWN
+}
