@@ -5,7 +5,12 @@ import {
 } from "@tanstack/react-form"
 import { z } from "zod"
 import { Button } from "~/components/ui/button"
-import { Field, FieldError, FieldLabel } from "~/components/ui/field"
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "~/components/ui/field"
 import { Input } from "~/components/ui/input"
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
@@ -50,7 +55,7 @@ const PersonForm: React.FC = (props) => {
         form.handleSubmit()
       }}
     >
-      <div>
+      <FieldGroup>
         <form.Field
           name="firstName"
           children={(field) => {
@@ -74,31 +79,54 @@ const PersonForm: React.FC = (props) => {
             )
           }}
         />
-      </div>
-      <form.Subscribe
-        selector={(state) => [
-          state.canSubmit,
-          state.isSubmitting,
-          state.isValid,
-        ]}
-        children={([canSubmit, isSubmitting, isValid]) => (
-          <div className="flex gap-4 py-4">
-            <Button type="submit" disabled={!isValid || !canSubmit}>
-              {isSubmitting ? "..." : "Submit"}
-            </Button>
-            <Button
-              type="reset"
-              onClick={(e) => {
-                // Avoid unexpected resets of form elements (especially <select> elements)
-                e.preventDefault()
-                form.reset()
-              }}
-            >
-              Reset
-            </Button>
-          </div>
-        )}
-      />
+        <form.Field
+          name="lastName"
+          children={(field) => {
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid
+            return (
+              <Field data-invalid={isInvalid}>
+                <FieldLabel htmlFor={field.name}>Last name</FieldLabel>
+                <Input
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  aria-invalid={isInvalid}
+                  placeholder="Last (family) name"
+                  autoComplete="off"
+                />
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
+              </Field>
+            )
+          }}
+        />
+        <form.Subscribe
+          selector={(state) => [
+            state.canSubmit,
+            state.isSubmitting,
+            state.isValid,
+          ]}
+          children={([canSubmit, isSubmitting, isValid]) => (
+            <div className="flex gap-4 py-4">
+              <Button type="submit" disabled={!isValid || !canSubmit}>
+                {isSubmitting ? "..." : "Submit"}
+              </Button>
+              <Button
+                type="reset"
+                onClick={(e) => {
+                  // Avoid unexpected resets of form elements (especially <select> elements)
+                  e.preventDefault()
+                  form.reset()
+                }}
+              >
+                Reset
+              </Button>
+            </div>
+          )}
+        />
+      </FieldGroup>
     </form>
   )
 }
