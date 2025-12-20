@@ -89,7 +89,7 @@ model Community {
 
 model Person {
   id          String   @id @default(cuid(2))
-  sex         String
+  gender         String
   firstName   String
   lastName    String
   description String?

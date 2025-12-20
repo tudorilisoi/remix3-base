@@ -1,18 +1,22 @@
-import {
-  revalidateLogic,
-  useForm,
-  type AnyFieldApi,
-} from "@tanstack/react-form"
+import { revalidateLogic, useForm } from "@tanstack/react-form"
 import { z } from "zod"
 import { Button } from "~/components/ui/button"
 import {
   Field,
+  FieldContent,
   FieldError,
   FieldGroup,
   FieldLabel,
 } from "~/components/ui/field"
 import { Input } from "~/components/ui/input"
-function FieldInfo({ field }: { field: AnyFieldApi }) {
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select"
+/* function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
       {field.state.meta.isTouched && !field.state.meta.isValid ? (
@@ -21,11 +25,12 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
       {field.state.meta.isValidating ? "Validating..." : null}
     </>
   )
-}
+} */
 
 const schema = z.object({
   firstName: z.string().min(2, "A first name is required"),
   lastName: z.string().min(2, "A last name is required"),
+  gender: z.enum(["Male", "Female"], "Gender is required"),
 })
 
 const PersonForm: React.FC = (props) => {
@@ -33,6 +38,7 @@ const PersonForm: React.FC = (props) => {
     defaultValues: {
       firstName: "",
       lastName: "",
+      gender: "",
     },
     validationLogic: revalidateLogic(),
     validators: {
@@ -98,6 +104,43 @@ const PersonForm: React.FC = (props) => {
                   autoComplete="off"
                 />
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
+              </Field>
+            )
+          }}
+        />
+        <form.Field
+          name="gender"
+          children={(field) => {
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid
+            return (
+              <Field orientation="responsive" data-invalid={isInvalid}>
+                <FieldContent>
+                  <FieldLabel htmlFor="form-tanstack-select-gender">
+                    Gender
+                  </FieldLabel>
+                  {/* <FieldDescription>
+                    For best results, select the language you speak.
+                  </FieldDescription> */}
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                </FieldContent>
+                <Select
+                  name={field.name}
+                  value={field.state.value}
+                  onValueChange={field.handleChange}
+                >
+                  <SelectTrigger
+                    id="form-tanstack-select-language"
+                    aria-invalid={isInvalid}
+                    className="min-w-30"
+                  >
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent position="item-aligned">
+                    <SelectItem value="Male">Male</SelectItem>
+                    <SelectItem value="Female">Female</SelectItem>
+                  </SelectContent>
+                </Select>
               </Field>
             )
           }}
