@@ -4,6 +4,9 @@ import {
   type AnyFieldApi,
 } from "@tanstack/react-form"
 import { z } from "zod"
+import { Button } from "~/components/ui/button"
+import { Field, FieldError, FieldLabel } from "~/components/ui/field"
+import { Input } from "~/components/ui/input"
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
@@ -16,8 +19,8 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
 }
 
 const schema = z.object({
-  firstName: z.string().min(1, "A first name is required"),
-  lastName: z.string().min(1, "A last name is required"),
+  firstName: z.string().min(2, "A first name is required"),
+  lastName: z.string().min(2, "A last name is required"),
 })
 
 const PersonForm: React.FC = (props) => {
@@ -29,6 +32,9 @@ const PersonForm: React.FC = (props) => {
     validationLogic: revalidateLogic(),
     validators: {
       onDynamic: schema,
+      onSubmit: schema,
+      onChange: schema,
+      onBlur: schema,
     },
     onSubmit: async ({ value }) => {
       // Do something with form data
@@ -42,72 +48,47 @@ const PersonForm: React.FC = (props) => {
         onSubmit={(e) => {
           e.preventDefault()
           e.stopPropagation()
+          // console.log(form.)
           form.handleSubmit()
         }}
       >
         <div>
-          {/* A type-safe field component*/}
           <form.Field
             name="firstName"
-            validators={{
-              onChange: ({ value }) =>
-                !value
-                  ? "A first name is required"
-                  : value.length < 3
-                    ? "First name must be at least 3 characters"
-                    : undefined,
-              onChangeAsyncDebounceMs: 500,
-              onChangeAsync: async ({ value }) => {
-                await new Promise((resolve) => setTimeout(resolve, 1000))
-                return (
-                  value.includes("error") && 'No "error" allowed in first name'
-                )
-              },
-            }}
             children={(field) => {
-              // Avoid hasty abstractions. Render props are great!
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid
+              console.log(`🚀 ~ PersonForm ~ field:`, field, isInvalid)
               return (
-                <>
-                  <label htmlFor={field.name}>First Name:</label>
-                  <input
+                <Field data-invalid={isInvalid}>
+                  <FieldLabel htmlFor={field.name}>First name</FieldLabel>
+                  <Input
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
+                    aria-invalid={isInvalid}
+                    placeholder="First (given) name"
+                    autoComplete="off"
                   />
-                  <FieldInfo field={field} />
-                </>
+                  {isInvalid && (
+                    <FieldError errors={field.state.meta.errors} />
+                    // <FieldInfo field={field} />
+                  )}
+                </Field>
               )
             }}
-          />
-        </div>
-        <div>
-          <form.Field
-            name="lastName"
-            children={(field) => (
-              <>
-                <label htmlFor={field.name}>Last Name:</label>
-                <input
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
-                <FieldInfo field={field} />
-              </>
-            )}
           />
         </div>
         <form.Subscribe
           selector={(state) => [state.canSubmit, state.isSubmitting]}
           children={([canSubmit, isSubmitting]) => (
             <>
-              <button type="submit" disabled={!canSubmit}>
+              <Button type="submit" disabled={!canSubmit}>
                 {isSubmitting ? "..." : "Submit"}
-              </button>
-              <button
+              </Button>
+              <Button
                 type="reset"
                 onClick={(e) => {
                   // Avoid unexpected resets of form elements (especially <select> elements)
@@ -116,7 +97,7 @@ const PersonForm: React.FC = (props) => {
                 }}
               >
                 Reset
-              </button>
+              </Button>
             </>
           )}
         />

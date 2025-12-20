@@ -1,4 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
+import PersonForm from "~/dsl/person/PersonForm"
 import { db } from "~/server/db"
 import type { Route } from "./+types/home"
 
@@ -32,7 +33,10 @@ export default function Home({ actionData, loaderData }: Route.ComponentProps) {
           </TabsTrigger>
           <TabsTrigger value="timeline">Timeline</TabsTrigger>
         </TabsList>
-        <TabsContent value="people">+</TabsContent>
+        <TabsContent value="people">
+          +
+          <PersonForm />
+        </TabsContent>
         <TabsContent value="timeline">Timeline here</TabsContent>
       </Tabs>
     </div>
