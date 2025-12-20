@@ -56,7 +56,6 @@ const PersonForm: React.FC = (props) => {
           children={(field) => {
             const isInvalid =
               field.state.meta.isTouched && !field.state.meta.isValid
-            // console.log(`🚀 ~ PersonForm ~ field:`, field, isInvalid)
             return (
               <Field data-invalid={isInvalid}>
                 <FieldLabel htmlFor={field.name}>First name</FieldLabel>
@@ -70,20 +69,21 @@ const PersonForm: React.FC = (props) => {
                   placeholder="First (given) name"
                   autoComplete="off"
                 />
-                {isInvalid && (
-                  <FieldError errors={field.state.meta.errors} />
-                  // <FieldInfo field={field} />
-                )}
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
             )
           }}
         />
       </div>
       <form.Subscribe
-        selector={(state) => [state.canSubmit, state.isSubmitting]}
-        children={([canSubmit, isSubmitting]) => (
-          <>
-            <Button type="submit" disabled={!canSubmit}>
+        selector={(state) => [
+          state.canSubmit,
+          state.isSubmitting,
+          state.isValid,
+        ]}
+        children={([canSubmit, isSubmitting, isValid]) => (
+          <div className="flex gap-4 py-4">
+            <Button type="submit" disabled={!isValid || !canSubmit}>
               {isSubmitting ? "..." : "Submit"}
             </Button>
             <Button
@@ -96,7 +96,7 @@ const PersonForm: React.FC = (props) => {
             >
               Reset
             </Button>
-          </>
+          </div>
         )}
       />
     </form>
