@@ -19,7 +19,7 @@ import {
 
 const genders = ["Male", "Female"] as const
 
-const schema = z.object({
+const personSchema = z.object({
   firstName: z.string().min(2, "A first name is required"),
   lastName: z.string().min(2, "A last name is required"),
   gender: z.enum(genders, "Gender is required"),
@@ -34,10 +34,10 @@ const PersonForm: React.FC = (props) => {
     },
     validationLogic: revalidateLogic(),
     validators: {
-      onDynamic: schema,
-      onSubmit: schema,
-      onChange: schema,
-      // onBlur: schema,
+      onDynamic: personSchema,
+      onSubmit: personSchema,
+      onChange: personSchema,
+      // onBlur: personSchema,
     },
     onSubmit: async ({ value }) => {
       // Do something with form data
