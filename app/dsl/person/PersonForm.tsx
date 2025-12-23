@@ -51,6 +51,19 @@ const PersonForm: React.FC = (props) => {
       // Do something with form data
       console.log(value)
     },
+    listeners: {
+      onChange: ({ formApi, fieldApi }) => {
+        // autosave logic
+        // if (formApi.state.isValid) {
+        //   formApi.handleSubmit()
+        // }
+
+        // fieldApi represents the field that triggered the event.
+        console.log(fieldApi.name, fieldApi.state.value)
+        console.log(formApi.state)
+      },
+      onChangeDebounceMs: 500,
+    },
   })
   return (
     <form
