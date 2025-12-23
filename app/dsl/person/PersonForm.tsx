@@ -16,21 +16,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select"
-/* function FieldInfo({ field }: { field: AnyFieldApi }) {
-  return (
-    <>
-      {field.state.meta.isTouched && !field.state.meta.isValid ? (
-        <em>{field.state.meta.errors.join(",")}</em>
-      ) : null}
-      {field.state.meta.isValidating ? "Validating..." : null}
-    </>
-  )
-} */
+
+const genders = ["Male", "Female"] as const
 
 const schema = z.object({
   firstName: z.string().min(2, "A first name is required"),
   lastName: z.string().min(2, "A last name is required"),
-  gender: z.enum(["Male", "Female"], "Gender is required"),
+  gender: z.enum(genders, "Gender is required"),
 })
 
 const PersonForm: React.FC = (props) => {
@@ -45,7 +37,7 @@ const PersonForm: React.FC = (props) => {
       onDynamic: schema,
       onSubmit: schema,
       onChange: schema,
-      onBlur: schema,
+      // onBlur: schema,
     },
     onSubmit: async ({ value }) => {
       // Do something with form data
@@ -150,8 +142,11 @@ const PersonForm: React.FC = (props) => {
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent position="item-aligned">
-                    <SelectItem value="Male">Male</SelectItem>
-                    <SelectItem value="Female">Female</SelectItem>
+                    {genders.map((gender) => (
+                      <SelectItem key={gender} value={gender}>
+                        {gender}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </Field>
@@ -163,10 +158,14 @@ const PersonForm: React.FC = (props) => {
             state.canSubmit,
             state.isSubmitting,
             state.isValid,
+            state.isPristine,
           ]}
-          children={([canSubmit, isSubmitting, isValid]) => (
+          children={([canSubmit, isSubmitting, isValid, isPristine]) => (
             <div className="flex gap-4 py-4">
-              <Button type="submit" disabled={!isValid || !canSubmit}>
+              <Button
+                type="submit"
+                disabled={!isValid || !canSubmit || isPristine}
+              >
                 {isSubmitting ? "..." : "Submit"}
               </Button>
               <Button
@@ -175,6 +174,7 @@ const PersonForm: React.FC = (props) => {
                   // Avoid unexpected resets of form elements (especially <select> elements)
                   e.preventDefault()
                   form.reset()
+                  console.log(`🚀 ~ PersonForm ~ form:`, form.state)
                 }}
               >
                 Reset
